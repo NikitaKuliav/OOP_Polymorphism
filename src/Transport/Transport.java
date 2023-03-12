@@ -1,14 +1,11 @@
 package Transport;
 
-public class Transport {
+public abstract class Transport {
     private final String brand;
     private final String model;
-    private final int year;
-    private final String country;
-    private String bodyColor;
-    private int maxSpeed;
+    private double engineVolume;
 
-    public Transport(String brand, String model, int year, String country, String bodyColor, int maxSpeed) {
+    public Transport(String brand, String model, double engineVolume) {
         if (brand == null || brand.equals("")) {
             brand = "default";
         }
@@ -17,16 +14,7 @@ public class Transport {
             model = "default";
         }
         this.model = model;
-        if (year <= 0) {
-            year = 2000;
-        }
-        this.year = year;
-        if (country == null || country.equals("")) {
-            country = "default";
-        }
-        this.country = country;
-        setBodyColor(bodyColor);
-        setMaxSpeed(maxSpeed);
+        setEngineVolume(engineVolume);
     }
 
     public String getBrand() {
@@ -37,45 +25,27 @@ public class Transport {
         return model;
     }
 
-    public int getYear() {
-        return year;
+
+    public double getEngineVolume() {
+        return engineVolume;
     }
 
-    public String getCountry() {
-        return country;
-    }
-
-    public String getBodyColor() {
-        return bodyColor;
-    }
-
-    public void setBodyColor(String bodyColor) {
-        if ((bodyColor==null) || bodyColor.isEmpty()) {
-            bodyColor = "white";
+    public void setEngineVolume(double engineVolume) {
+        if (engineVolume <= 0) {
+            engineVolume = 1.6;
         }
-        this.bodyColor = bodyColor;
+        this.engineVolume = engineVolume;
     }
 
-    public int getMaxSpeed() {
-        return maxSpeed;
-    }
+    public abstract void startMove();
+    public abstract void finishMove();
 
-    public void setMaxSpeed(int maxSpeed) {
-        if (maxSpeed <= 0) {
-            maxSpeed = 180;
-        }
-        this.maxSpeed = maxSpeed;
-    }
     @Override
     public String toString() {
         return
                 "марка='" + brand + '\'' +
                         ", модель='" + model + '\'' +
-
-                        ", цвет='" + bodyColor + '\'' +
-                        ", год=" + year +
-                        ", страна сборки='" + country + '\'' +
-                        ", максимальная скорость='" + maxSpeed + '\'';
+                        ", объем двигателя=" + engineVolume;
 
     }
 }
