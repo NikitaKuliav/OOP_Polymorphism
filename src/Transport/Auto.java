@@ -1,11 +1,12 @@
 package Transport;
 
-public class Auto extends Transport {
+public class Auto extends Transport<DriverB> {
 
     public Auto(String brand,
                 String model,
-                double engineVolume) {
-        super(brand, model, engineVolume);
+                double engineVolume,
+                DriverB driver) {
+        super(brand, model, engineVolume, driver);
     }
 
     @Override

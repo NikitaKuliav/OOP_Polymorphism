@@ -1,11 +1,15 @@
 package Transport;
 
-public abstract class Transport implements Competing {
+public abstract class Transport<T extends Driver> implements Competing {
     private final String brand;
     private final String model;
     private double engineVolume;
+    private T driver;
 
-    public Transport(String brand, String model, double engineVolume) {
+    public Transport(String brand,
+                     String model,
+                     double engineVolume,
+                     T driver) {
         if (brand == null || brand.equals("")) {
             brand = "default";
         }
@@ -15,6 +19,7 @@ public abstract class Transport implements Competing {
         }
         this.model = model;
         setEngineVolume(engineVolume);
+        setDriver(driver);
     }
 
     public String getBrand() {
@@ -37,8 +42,18 @@ public abstract class Transport implements Competing {
         this.engineVolume = engineVolume;
     }
 
+    public T getDriver() {
+        return driver;
+    }
+
+    public void setDriver(T driver) {
+        this.driver = driver;
+    }
+
     public abstract void startMove();
     public abstract void finishMove();
+
+
 
     @Override
     public String toString() {
